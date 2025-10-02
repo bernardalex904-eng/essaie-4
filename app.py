@@ -1,38 +1,38 @@
 import io
-... from datetime import datetime
-... 
-... import numpy as np
-... import pandas as pd
-... import streamlit as st
-... 
-... # Dépendances optionnelles
-... try:
-...     from docx import Document
-...     from docx.shared import Inches
-...     DOCX_OK = True
-... except Exception:
-...     DOCX_OK = False
-... 
-... try:
-...     import fitz  # PyMuPDF
-...     PYMUPDF_OK = True
-... except Exception:
-...     PYMUPDF_OK = False
-... 
-... st.set_page_config(page_title="Contrôle dimensionnel – PV", layout="wide")
-... st.title("🧪 Contrôle dimensionnel – Génération de PV")
-... 
-... # --- Sidebar: Infos PV ---
-... st.sidebar.header("Paramètres du PV")
-... operateur = st.sidebar.text_input("Opérateur", value="")
-... ref_piece = st.sidebar.text_input("Référence pièce", value="")
-... ref_commande = st.sidebar.text_input("Référence commande", value="")
-... commentaire = st.sidebar.text_area("Commentaires", value="")
-... 
-... # --- Upload du plan (image/PDF) ---
-... st.subheader("1) Plan de référence (image ou PDF)")
-... plan_file = st.file_uploader(
-...     "Importer un plan (PNG/JPG/PDF)", type=["png", "jpg", "jpeg", "pdf"], key="plan"
+ from datetime import datetime
+ 
+ import numpy as np
+ import pandas as pd
+ import streamlit as st
+ 
+ # Dépendances optionnelles
+ try:
+     from docx import Document
+     from docx.shared import Inches
+     DOCX_OK = True
+ except Exception:
+     DOCX_OK = False
+ 
+ try:
+     import fitz  # PyMuPDF
+     PYMUPDF_OK = True
+ except Exception:
+     PYMUPDF_OK = False
+ 
+ st.set_page_config(page_title="Contrôle dimensionnel – PV", layout="wide")
+ st.title("🧪 Contrôle dimensionnel – Génération de PV")
+ 
+ # --- Sidebar: Infos PV ---
+ st.sidebar.header("Paramètres du PV")
+ operateur = st.sidebar.text_input("Opérateur", value="")
+ ref_piece = st.sidebar.text_input("Référence pièce", value="")
+ ref_commande = st.sidebar.text_input("Référence commande", value="")
+ commentaire = st.sidebar.text_area("Commentaires", value="")
+ 
+ # --- Upload du plan (image/PDF) ---
+ st.subheader("1) Plan de référence (image ou PDF)")
+ plan_file = st.file_uploader(
+     "Importer un plan (PNG/JPG/PDF)", type=["png", "jpg", "jpeg", "pdf"], key="plan"
 )
 plan_preview = None   # tuple (type, bytes) où type ∈ {"image", "pdf_image", "pdf_no_preview"}
 plan_filename = None
